@@ -7,24 +7,31 @@ def multi(n1 ,n2):
 def div(n1 ,n2):
     return n1 / n2
 
-print("Enter the operation\n")
-print("1 Add\n")
-print("2 Subtract\n")
-print("3 Multiply\n")
-print("4 Divide\n")
+calculater = {
+    "+" : add,
+    "-" : sub,
+    "*" : multi,
+    "/" : div
+}
 
-select = int(input("Select operation from 1,2,3,4 : "))
+def new_process():
+    continue_process = True
+    num1 = float(input("Enter the first number: "))
 
-num1 = int(input("Enter first number : "))
-num2 = int(input("Enter second number : "))
+    while continue_process:
+        for i in calculater:
+            print(i)
+        symbol = input("Pick the operation: ")
+        num2 = float(input("Enter the second number: "))
+        answer = calculater[symbol](num1,num2)
+        print(f"{num1} {symbol} {num2} = {answer}")
 
-if select == 1:
-    print(num1 , "+" , num2 ,"=", add(num1,num2))
-elif select == 2:
-    print(num1 , "-" , num2,"=",sub(num1,num2) )
-elif select == 3:
-    print(num1 , "*" , num2,"=",multi(num1,num2) )
-elif select == 4:
-    print(num1 , "/" , num2,"=",div(num1,num2) )   
-else:
-    print("invalid input") 
+        choice = input(f"Type 'y' to continue calculation with {answer}, or type 'n' to start a new calulation")
+
+        if choice == 'y':
+            num1 = answer
+        else:
+            continue_process = False
+            new_process()
+
+new_process()
